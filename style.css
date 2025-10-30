@@ -1,0 +1,213 @@
+/* --- Estils Generals (Guia d'Estil: Net i Vibrant) --- */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap');
+
+:root {
+    /* Paleta de colors càlida i harmoniosa (pots canviar-los) */
+    --color-principal: #005A9C;  /* Un blau corporatiu */
+    --color-secundari: #FF6B00;  /* Taronja vibrant per CTAs */
+    --color-text: #333;
+    --color-fons: #FFFFFF;
+    --color-fons-suau: #F4F8FB;
+}
+
+body {
+    font-family: 'Open Dyslexic', sans-serif;
+    margin: 0;;
+    padding: 0;
+    background-color: var(--color-fons);
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+    color: var(--color-principal);
+}
+
+h1 { font-size: 3rem; margin-bottom: 10px; }
+h2 { font-size: 2.2rem; text-align: center; margin-bottom: 40px; }
+h3 { font-size: 1.5rem; }
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* --- 1. Barra de Navegació --- */
+.navbar {
+    background-color: var(--color-fons);
+    border-bottom: 1px solid #EEE;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    height: 50px; /* Ajusta segons el teu logo */
+}
+
+.navbar nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar nav a {
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 700;
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+
+.navbar nav a:hover,
+.navbar nav a.active {
+    color: var(--color-secundari);
+}
+
+/* --- 2. Secció Hero (Principal) --- */
+.hero {
+    background-color: var(--color-fons-suau);
+    padding: 60px 0;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.hero-text { flex: 1; }
+.hero-image { flex: 1; text-align: center; }
+.hero-image img { max-width: 450px; }
+.subtitle { font-size: 1.25rem; }
+
+/* --- 3. Llibres Destacats --- */
+.featured-books {
+    padding: 60px 0;
+}
+
+.books-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.book-card {
+    text-align: center;
+}
+
+.book-card img {
+    width: 250px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.book-card img:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.book-card h3 {
+    margin-top: 15px;
+    color: var(--color-text);
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--color-secundari);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.cta-button:hover {
+    background-color: #E66000;
+    transform: scale(1.05);
+}
+
+/* --- 4. Doble CTA --- */
+.dual-cta {
+    background-color: var(--color-fons-suau);
+    padding: 60px 0;
+}
+
+.dual-cta .container {
+    display: flex;
+    gap: 30px;
+}
+
+.cta-box {
+    flex: 1;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.cta-box.lector {
+    background-color: var(--color-principal);
+    color: white;
+}
+.cta-box.lector h3 { color: white; }
+.cta-button.cta-lector { background-color: white; color: var(--color-principal); }
+
+.cta-box.adult {
+    background-color: var(--color-fons);
+    border: 2px solid var(--color-principal);
+}
+.cta-link.cta-adult {
+    font-weight: 700;
+    color: var(--color-principal);
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+/* --- 5. Teaser (Pròximament) --- */
+.teaser {
+    padding: 60px 0;
+}
+.teaser-content {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    background-color: var(--color-fons-suau);
+    padding: 40px;
+    border-radius: 12px;
+}
+.teaser-image {
+    width: 180px;
+    border-radius: 8px;
+}
+.teaser-text p { font-size: 1.1rem; }
+
+/* --- 6. Footer --- */
+footer {
+    background-color: var(--color-principal);
+    color: white;
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 40px;
+}
+footer p { margin: 5px 0; font-size: 0.9rem; }
