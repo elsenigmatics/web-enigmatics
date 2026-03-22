@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="ca" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Els Enigmàtics: Llibres d'aventures juvenils que uneixen matemàtiques (STEAM) i emocions (SEL). Descobreix la col·lecció i recursos per a famílies.">
+    <title>Els Enigmàtics - Llibres que desperten ments</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuració del tema -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'enigma-blue': '#181850',   /* Blau fosc profund */
+                        'enigma-yellow': '#FFD700', /* Groc daurat */
+                        'enigma-light': '#F4F7F6',  /* Blanc trencat */
+                        'enigma-cyan': '#66FFFF',   /* Detall cian */
+                    },
+                    fontFamily: {
+                        'heading': ['"Changa One"', 'sans-serif'],
+                        'body': ['"Nunito"', 'sans-serif'],
+                    },
+                    animation: {
+                        'spin-slow': 'spin 60s linear infinite',
+                        'bounce-slow': 'bounce 3s infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Fonts Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Changa+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #FFFEFA; 
+            color: #333;
+        }
+
+        h1, h2, h3, .brand-font {
+            font-family: 'Changa One', sans-serif;
+            text-transform: uppercase;
+        }
+        
+        /* Botons amb efecte 3D */
+        .btn-enigma {
+            box-shadow: 0 4px 0 #b39500;
+            transition: all 0.15s ease-in-out;
+        }
+        .btn-enigma:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #b39500;
+        }
+        .btn-enigma:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #b39500;
+        }
+
+        /* Transicions suaus per seccions */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-link-active {
+            color: #FFD700 !important;
+            border-bottom: 3px solid #FFD700;
+        }
+    </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen selection:bg-enigma-yellow selection:text-enigma-blue">
+
+    <!-- NAVEGACIÓ -->
+    <header class="bg-enigma-blue shadow-lg sticky top-0 z-50 border-b-4 border-enigma-yellow transition-all duration-300">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo Nav (Inicialment ocult, apareix amb scroll) -->
+                <a href="#inici" id="nav-brand" class="flex-shrink-0 flex items-center nav-link group opacity-0 transition-opacity duration-500" data-page="inici" aria-label="Tornar a l'inici">
+                    <img src="imatges/logo els enigmatics.png" alt="Logo Els Enigmàtics" class="h-12 w-auto transition-transform group-hover:scale-105" onerror="this.style.display='none'">
+                    <span class="ml-3 text-xl brand-font text-white group-hover:text-enigma-yellow transition-colors md:hidden lg:block hidden">ELS ENIGMÀTICS</span>
+                </a>
+                
+                <!-- Menú Escriptori -->
+                <div class="hidden md:ml-6 md:flex md:space-x-6 lg:space-x-8">
+                    <a href="#inici" class="nav-link inline-flex items-center px-1 pt-1 text-lg font-bold text-white hover:text-enigma-yellow transition-colors nav-link-active" data-page="inici">Inici</a>
+                    <a href="#colleccio" class="nav-link inline-flex items-center px-1 pt-1 text-lg font-bold text-white hover:text-enigma-yellow transition-colors" data-page="colleccio">Biblioteca</a>
+                    <a href="#equip" class="nav-link inline-flex items-center px-1 pt-1 text-lg font-bold text-white hover:text-enigma-yellow transition-colors" data-page="equip">Equip</a>
+                    <a href="#laboratori" class="nav-link inline-flex items-center px-1 pt-1 text-lg font-bold text-white hover:text-enigma-yellow transition-colors" data-page="laboratori">Laboratori</a>
+                    <a href="#families" class="nav-link inline-flex items-center px-1 pt-1 text-lg font-bold text-white hover:text-enigma-yellow transition-colors" data-page="families">Famílies</a>
+                    <a href="#club" class="nav-link inline-flex items-center px-1 pt-1 text-lg font-bold text-white hover:text-enigma-yellow transition-colors" data-page="club">Club</a>
+                    <a href="#autor" class="nav-link inline-flex items-center px-1 pt-1 text-lg font-bold text-white hover:text-enigma-yellow transition-colors" data-page="autor">Autor</a>
+                </div>
+                
+                <!-- Botó Mòbil -->
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-enigma-yellow hover:text-white hover:bg-white/10 focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Obrir menú</span>
+                        <!-- Icona Hamburguesa -->
+                        <svg class="block h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <!-- Icona Tancar -->
+                        <svg class="hidden h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Menú Mòbil -->
+        <div class="md:hidden hidden bg-enigma-blue border-t border-enigma-yellow/30" id="mobile-menu">
+            <div class="pt-2 pb-3 space-y-1 px-2">
+                <a href="#inici" class="nav-link mobile-nav-link block px-3 py-3 rounded-md text-base font-bold text-white bg-white/10" data-page="inici">Inici</a>
+                <a href="#colleccio" class="nav-link mobile-nav-link block px-3 py-3 rounded-md text-base font-bold text-gray-300 hover:text-white hover:bg-white/10" data-page="colleccio">Biblioteca</a>
+                <a href="#equip" class="nav-link mobile-nav-link block px-3 py-3 rounded-md text-base font-bold text-gray-300 hover:text-white hover:bg-white/10" data-page="equip">Equip</a>
+                <a href="#laboratori" class="nav-link mobile-nav-link block px-3 py-3 rounded-md text-base font-bold text-gray-300 hover:text-white hover:bg-white/10" data-page="laboratori">Laboratori</a>
+                <a href="#families" class="nav-link mobile-nav-link block px-3 py-3 rounded-md text-base font-bold text-gray-300 hover:text-white hover:bg-white/10" data-page="families">Famílies</a>
+                <a href="#club" class="nav-link mobile-nav-link block px-3 py-3 rounded-md text-base font-bold text-gray-300 hover:text-white hover:bg-white/10" data-page="club">Club</a>
+                <a href="#autor" class="nav-link mobile-nav-link block px-3 py-3 rounded-md text-base font-bold text-gray-300 hover:text-white hover:bg-white/10" data-page="autor">Autor</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- ============================================= -->
+        <!-- SECCIÓ 1: INICI (HERO) -->
+        <!-- ============================================= -->
+        <section id="inici" class="content-section" style="display: block;">
+            <div class="relative pt-10 pb-24 text-center overflow-hidden">
+                <!-- Fons decoratiu (Engranatge subtil) -->
+                <div class="absolute top-0 right-0 -mt-20 -mr-20 opacity-5 pointer-events-none">
+                    <i class="fas fa-cog text-[400px] text-enigma-blue animate-spin-slow"></i>
+                </div>
+
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <!-- LOGO GRAN -->
+                    <div class="mb-6 flex justify-center">
+                        <img src="imatges/logo els enigmatics.png" alt="Gran Logo Els Enigmàtics" class="h-32 md:h-48 w-auto drop-shadow-xl animate-[fadeIn_1s_ease-out]" onerror="this.style.display='none'">
+                    </div>
+
+                    <h1 class="text-5xl md:text-7xl text-enigma-blue tracking-tighter mb-4 sr-only">ELS ENIGMÀTICS</h1>
+                    
+                    <p class="mt-4 text-2xl md:text-3xl font-semibold text-gray-600 font-body max-w-2xl mx-auto">
+                        Les aventures que fan <span class="text-enigma-blue font-bold">sentir</span>, <span class="text-enigma-blue font-bold">imaginar</span> i <span class="text-enigma-blue font-bold">raonar</span>.
+                    </p>
+                    
+                    <!-- Il·lustració Hero -->
+                    <div class="mt-12 transform hover:scale-[1.01] transition-transform duration-500">
+                        <img src="imatges/equip.png" alt="Equip Els Enigmàtics" class="rounded-2xl shadow-2xl w-full mx-auto border-4 border-enigma-yellow" onerror="this.src='https://placehold.co/1000x500/181850/FFFFFF?text=Il·lustració+Equip'">
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="mt-16 max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                        <!-- Nens -->
+                        <div class="bg-white p-8 rounded-3xl shadow-xl border-4 border-enigma-yellow flex flex-col justify-between hover:shadow-2xl transition-shadow relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                                <i class="fas fa-puzzle-piece text-6xl text-enigma-yellow"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl text-enigma-blue mb-2">Hola, Enigmàtic!</h2>
+                                <p class="text-gray-600 mb-6">T'atreveixes a resoldre els misteris? T'esperen reptes i jocs.</p>
+                            </div>
+                            <button id="cta-kids" class="btn-enigma bg-enigma-yellow text-enigma-blue font-black py-3 px-6 rounded-full text-xl w-full">
+                                Entra al Laboratori
+                            </button>
+                        </div>
+                        
+                        <!-- Adults -->
+                        <div class="bg-enigma-blue p-8 rounded-3xl shadow-xl border-4 border-enigma-blue flex flex-col justify-between hover:shadow-2xl transition-shadow relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                                <i class="fas fa-graduation-cap text-6xl text-white"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl text-enigma-yellow mb-2">Per a les Famílies</h2>
+                                <p class="text-gray-200 mb-6">Descobreix com ajudar els teus fills i el valor pedagògic de la col·lecció.</p>
+                            </div>
+                            <button id="cta-adults" class="bg-transparent border-2 border-enigma-yellow text-enigma-yellow hover:bg-enigma-yellow hover:text-enigma-blue font-bold py-3 px-6 rounded-full transition-all duration-300 text-lg w-full">
+                                Informació per a Pares
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teaser Llibres -->
+            <div class="bg-gray-50 py-20 border-t border-gray-200">
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-3xl text-center text-enigma-blue mb-12 relative inline-block w-full">
+                        Descobreix les primeres aventures
+                        <span class="block w-24 h-1 bg-enigma-yellow mx-auto mt-4 rounded-full"></span>
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <!-- Llibre 1 Teaser -->
+                        <div class="flex flex-col sm:flex-row items-center bg-white rounded-2xl shadow-lg p-6 border border-gray-100 hover:shadow-2xl transition-shadow group cursor-pointer" onclick="window.open('https://amzn.eu/d/your-link-2', '_blank')">
+                            <img src="imatges/PORTADA ANCESTRES AMAZON.jpg" alt="Portada L'arbre dels ancestres" class="w-40 rounded shadow-md transform -rotate-2 group-hover:rotate-0 transition-transform duration-300" loading="lazy">
+                            <div class="mt-6 sm:mt-0 sm:ml-6 text-center sm:text-left">
+                                <h3 class="text-xl text-enigma-blue font-bold mb-2">L’arbre dels ancestres</h3>
+                                <p class="text-sm text-gray-600 leading-relaxed mb-4">Descobrir el passat i un número impossible els convertirà en un equip.</p>
+                                <span class="text-enigma-blue font-bold hover:text-enigma-yellow underline decoration-2 underline-offset-4">Comprar a Amazon &rarr;</span>
+                            </div>
+                        </div>
+
+                        <!-- Llibre 2 Teaser -->
+                        <div class="flex flex-col sm:flex-row items-center bg-white rounded-2xl shadow-lg p-6 border border-gray-100 hover:shadow-2xl transition-shadow group cursor-pointer" onclick="window.open('https://amzn.eu/d/your-link-1', '_blank')">
+                            <img src="imatges/PORTADA Divina AMAZON.jpg" alt="Portada La divina proporció" class="w-40 rounded shadow-md transform rotate-2 group-hover:rotate-0 transition-transform duration-300" loading="lazy">
+                            <div class="mt-6 sm:mt-0 sm:ml-6 text-center sm:text-left">
+                                <h3 class="text-xl text-enigma-blue font-bold mb-2">La divina proporció</h3>
+                                <p class="text-sm text-gray-600 leading-relaxed mb-4">La bellesa es pot mesurar? Els enigmàtics descobreixen la màgia dels nombres.</p>
+                                <span class="text-enigma-blue font-bold hover:text-enigma-yellow underline decoration-2 underline-offset-4">Comprar a Amazon &rarr;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- SECCIÓ 2: BIBLIOTECA (CATÀLEG) -->
+        <!-- ============================================= -->
+        <section id="colleccio" class="content-section py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl text-center text-enigma-blue mb-16">La Biblioteca dels Enigmàtics</h2>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <!-- Card 1 -->
+                    <div class="group cursor-pointer book-card" data-book-id="1">
+                        <div class="relative overflow-hidden rounded-xl shadow-lg border-2 border-transparent group-hover:border-enigma-yellow transition-all aspect-[2/3]">
+                            <img src="imatges/PORTADA ANCESTRES AMAZON.jpg" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" alt="Llibre 1" loading="lazy">
+                            <div class="absolute inset-0 bg-enigma-blue/0 group-hover:bg-enigma-blue/10 transition-colors">
+                                <div class="absolute bottom-4 left-0 w-full text-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <span class="bg-enigma-yellow text-enigma-blue text-xs font-bold px-3 py-1 rounded-full shadow-md">Veure Detalls</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="mt-4 text-center text-lg font-bold text-enigma-blue group-hover:text-enigma-yellow transition-colors">L'arbre dels ancestres</h3>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="group cursor-pointer book-card" data-book-id="2">
+                        <div class="relative overflow-hidden rounded-xl shadow-lg border-2 border-transparent group-hover:border-enigma-yellow transition-all aspect-[2/3]">
+                            <img src="imatges/PORTADA Divina AMAZON.jpg" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" alt="Llibre 2" loading="lazy">
+                            <div class="absolute inset-0 bg-enigma-blue/0 group-hover:bg-enigma-blue/10 transition-colors">
+                                <div class="absolute bottom-4 left-0 w-full text-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <span class="bg-enigma-yellow text-enigma-blue text-xs font-bold px-3 py-1 rounded-full shadow-md">Veure Detalls</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="mt-4 text-center text-lg font-bold text-enigma-blue group-hover:text-enigma-yellow transition-colors">La divina proporció</h3>
+                    </div>
+
+                    <!-- Card 3 (Properament) -->
+                    <div class="group cursor-pointer opacity-70 hover:opacity-100 transition-opacity book-card" data-book-id="3">
+                        <div class="relative overflow-hidden rounded-xl shadow-lg bg-gray-200 aspect-[2/3] flex items-center justify-center border-2 border-transparent group-hover:border-enigma-yellow">
+                            <span class="text-4xl text-gray-400 font-heading">?</span>
+                        </div>
+                        <h3 class="mt-4 text-center text-lg font-bold text-gray-500">El codi secret</h3>
+                        <p class="text-center text-xs text-enigma-blue font-bold uppercase tracking-widest mt-1">Properament</p>
+                    </div>
+
+                    <!-- Placeholder -->
+                    <div class="flex flex-col items-center justify-center bg-gray-50 rounded-xl border-2 border-dashed border-gray-300 aspect-[2/3]">
+                        <i class="fas fa-pencil-alt text-3xl text-gray-300 mb-2"></i>
+                        <p class="text-gray-400 font-bold text-center px-4 text-sm">L'autor està escrivint...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- SECCIÓ 3: EQUIP -->
+        <!-- ============================================= -->
+        <section id="equip" class="content-section py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl text-center text-enigma-blue mb-16">Coneix l'Equip</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
+                    <!-- Elies -->
+                    <div class="text-center p-6 bg-white rounded-2xl shadow-lg border-t-4 border-[#00A8E8] hover:-translate-y-2 transition-transform duration-300 group">
+                        <div class="relative w-32 h-32 mx-auto mb-4">
+                            <img src="imatges/elies.png" alt="Elies" class="w-full h-full rounded-full border-4 border-[#00A8E8] shadow-md object-cover relative z-10" loading="lazy" onerror="this.src='https://placehold.co/300x300/00A8E8/FFFFFF?text=E'">
+                            <div class="absolute inset-0 rounded-full bg-[#00A8E8] blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                        </div>
+                        <h3 class="text-2xl text-[#00A8E8] mb-1">Elies</h3>
+                        <p class="font-bold text-xs text-gray-400 uppercase tracking-wide">La Lògica</p>
+                        <p class="mt-3 text-gray-600 text-sm leading-relaxed">Analític i brillant. Veu patrons on altres veuen caos.</p>
+                    </div>
+
+                    <!-- Joana -->
+                    <div class="text-center p-6 bg-white rounded-2xl shadow-lg border-t-4 border-[#8CC63F] hover:-translate-y-2 transition-transform duration-300 group">
+                        <div class="relative w-32 h-32 mx-auto mb-4">
+                            <img src="imatges/joana.png" alt="Joana" class="w-full h-full rounded-full border-4 border-[#8CC63F] shadow-md object-cover relative z-10" loading="lazy" onerror="this.src='https://placehold.co/300x300/8CC63F/FFFFFF?text=J'">
+                            <div class="absolute inset-0 rounded-full bg-[#8CC63F] blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                        </div>
+                        <h3 class="text-2xl text-[#8CC63F] mb-1">Joana</h3>
+                        <p class="font-bold text-xs text-gray-400 uppercase tracking-wide">La Visió</p>
+                        <p class="mt-3 text-gray-600 text-sm leading-relaxed">Artista i observadora. Posa llum als misteris.</p>
+                    </div>
+
+                    <!-- Sofia -->
+                    <div class="text-center p-6 bg-white rounded-2xl shadow-lg border-t-4 border-[#E63946] hover:-translate-y-2 transition-transform duration-300 group">
+                        <div class="relative w-32 h-32 mx-auto mb-4">
+                            <img src="imatges/sofia.png" alt="Sofia" class="w-full h-full rounded-full border-4 border-[#E63946] shadow-md object-cover relative z-10" loading="lazy" onerror="this.src='https://placehold.co/300x300/E63946/FFFFFF?text=S'">
+                            <div class="absolute inset-0 rounded-full bg-[#E63946] blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                        </div>
+                        <h3 class="text-2xl text-[#E63946] mb-1">Sofia</h3>
+                        <p class="font-bold text-xs text-gray-400 uppercase tracking-wide">L'Acció</p>
+                        <p class="mt-3 text-gray-600 text-sm leading-relaxed">Valenta i decidida. L'experimentació és el seu fort.</p>
+                    </div>
+
+                    <!-- Moha -->
+                    <div class="text-center p-6 bg-white rounded-2xl shadow-lg border-t-4 border-[#F9C74F] hover:-translate-y-2 transition-transform duration-300 group">
+                        <div class="relative w-32 h-32 mx-auto mb-4">
+                            <img src="imatges/mohammed.png" alt="Moha" class="w-full h-full rounded-full border-4 border-[#F9C74F] shadow-md object-cover relative z-10" loading="lazy" onerror="this.src='https://placehold.co/300x300/F9C74F/FFFFFF?text=M'">
+                            <div class="absolute inset-0 rounded-full bg-[#F9C74F] blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                        </div>
+                        <h3 class="text-2xl text-[#D4A017] mb-1">Moha</h3>
+                        <p class="font-bold text-xs text-gray-400 uppercase tracking-wide">La Veritat</p>
+                        <p class="mt-3 text-gray-600 text-sm leading-relaxed">Un cercador de fets. Contrasta cada pista.</p>
+                    </div>
+                    
+                    <!-- Abra -->
+                     <div class="text-center p-6 bg-white rounded-2xl shadow-lg border-t-4 border-gray-400 hover:-translate-y-2 transition-transform duration-300 group">
+                        <div class="relative w-32 h-32 mx-auto mb-4">
+                            <img src="imatges/abraham.jpg" alt="Abra" class="w-full h-full rounded-full border-4 border-gray-400 shadow-md object-cover relative z-10" loading="lazy" onerror="this.src='https://placehold.co/300x300/9CA3AF/FFFFFF?text=A'">
+                            <div class="absolute inset-0 rounded-full bg-gray-400 blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                        </div>
+                        <h3 class="text-2xl text-gray-600 mb-1">Abra</h3>
+                        <p class="font-bold text-xs text-gray-400 uppercase tracking-wide">El Mentor</p>
+                        <p class="mt-3 text-gray-600 text-sm leading-relaxed">El professor de l'aula 314. Guia amb reptes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- SECCIÓ 4: LABORATORI -->
+        <!-- ============================================= -->
+        <section id="laboratori" class="content-section py-24 bg-gray-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <span class="inline-block p-4 rounded-full bg-enigma-yellow text-enigma-blue text-4xl mb-4 shadow-lg">
+                        <i class="fas fa-flask"></i>
+                    </span>
+                    <h2 class="text-4xl text-enigma-blue mb-4">El Laboratori</h2>
+                    <p class="text-xl text-gray-600">Aquí trobaràs les solucions als reptes de cada llibre.</p>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-xl p-8 border-2 border-gray-100">
+                    <div class="space-y-4">
+                        <!-- Download Item 1 -->
+                        <a href="#" class="flex items-center p-4 rounded-xl hover:bg-enigma-light border border-gray-200 hover:border-enigma-yellow transition-all group">
+                            <div class="flex-shrink-0 w-12 h-12 bg-enigma-blue text-white rounded-full flex items-center justify-center mr-4 shadow-md">
+                                <span class="font-bold font-heading text-xl">1</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="text-lg font-bold text-enigma-blue group-hover:text-enigma-yellow transition-colors">Solucions: L'arbre dels ancestres</h4>
+                                <p class="text-sm text-gray-500">PDF • 2.4 MB</p>
+                            </div>
+                            <i class="fas fa-download text-gray-400 group-hover:text-enigma-blue text-xl"></i>
+                        </a>
+
+                        <!-- Download Item 2 -->
+                        <a href="#" class="flex items-center p-4 rounded-xl hover:bg-enigma-light border border-gray-200 hover:border-enigma-yellow transition-all group">
+                            <div class="flex-shrink-0 w-12 h-12 bg-enigma-blue text-white rounded-full flex items-center justify-center mr-4 shadow-md">
+                                <span class="font-bold font-heading text-xl">2</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="text-lg font-bold text-enigma-blue group-hover:text-enigma-yellow transition-colors">Solucions: La divina proporció</h4>
+                                <p class="text-sm text-gray-500">PDF • 3.1 MB</p>
+                            </div>
+                            <i class="fas fa-download text-gray-400 group-hover:text-enigma-blue text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- SECCIÓ 5: FAMÍLIES -->
+        <!-- ============================================= -->
+        <section id="families" class="content-section py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Nou Llibre -->
+                <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border-4 border-enigma-yellow text-gray-800 max-w-6xl mx-auto mb-16">
+                    <div class="flex flex-col md:flex-row gap-12 items-center">
+                        <div class="md:w-1/3 text-center">
+                            <img src="imatges/A mi no portada.jpg" alt="Portada A mi no m'ho van explicar així" class="rounded-lg shadow-xl w-full max-w-[280px] mx-auto transform hover:rotate-1 transition-transform duration-500 border border-gray-100" loading="lazy" onerror="this.src='https://placehold.co/300x450/enigma-blue/white?text=A+mi+no+m\'ho+van+explicar+així'">
+                        </div>
+                        <div class="md:w-2/3">
+                            <span class="inline-block bg-enigma-blue text-white px-4 py-1 rounded-full text-sm font-bold mb-4 tracking-wide">NOVETAT PER A PARES I MARES</span>
+                            
+                            <h2 class="text-4xl text-enigma-blue mb-4 leading-tight">A mi no m'ho van explicar així</h2>
+                            <h3 class="text-2xl font-bold text-gray-500 mb-6 font-heading">Els deures de mates s'han convertit en una guerra?</h3>
+                            
+                            <p class="mb-4 text-lg leading-relaxed text-gray-600">
+                                T'has sentit mai impotent mirant la llibreta del teu fill? No entens per què "dibuixen" les sumes o per què no memoritzen les taules com abans? No estàs sol.
+                            </p>
+                            <p class="mb-6 text-lg leading-relaxed text-gray-600">
+                                Aquest llibre no és un curs de matemàtiques per a adults. És un <strong>traductor</strong>. T'explico la ciència de com aprèn el cervell i et dono eines pràctiques per passar del "No en sé" al "Ho investiguem junts?".
+                            </p>
+
+                            <ul class="space-y-3 mb-8 text-gray-700">
+                                <li class="flex items-start"><i class="fas fa-check-circle text-enigma-yellow mt-1 mr-3 text-xl"></i> <span><strong>Farmaciola d'Urgència:</strong> Què dir (i què no) quan es bloquegen o ploren.</span></li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-enigma-yellow mt-1 mr-3 text-xl"></i> <span><strong>Descodificador:</strong> Entén per fi què vol dir "treball per projectes" o "competències".</span></li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-enigma-yellow mt-1 mr-3 text-xl"></i> <span><strong>El Laboratori a Casa:</strong> Materials i jocs que funcionen millor que una fitxa.</span></li>
+                            </ul>
+
+                            <a href="#" class="btn-enigma inline-block bg-enigma-yellow text-enigma-blue font-black py-3 px-8 rounded-full text-lg hover:text-white transition-colors">
+                                Vull pau a l'hora dels deures
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projecte STEAM + SEL -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <!-- Esquerra -->
+                    <div class="bg-enigma-blue rounded-3xl shadow-xl p-8 text-white border-2 border-enigma-blue flex flex-col">
+                        <h3 class="text-2xl font-bold text-enigma-yellow mb-4">Per què "Els Enigmàtics"?</h3>
+                        <p class="mb-6 text-gray-200 text-lg">
+                            Aquesta col·lecció uneix dues peces clau per al desenvolupament dels vostres fills:
+                        </p>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-start">
+                                <span class="bg-enigma-cyan text-enigma-blue p-2 rounded-full mr-3 text-xs flex items-center justify-center w-8 h-8"><i class="fas fa-brain"></i></span>
+                                <div>
+                                    <strong class="text-enigma-cyan block">STEAM</strong>
+                                    <span class="text-sm text-gray-300">Aprenen conceptes curriculars (matemàtiques, ciència) sense adonar-se'n, gaudint de l'aventura.</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-enigma-yellow text-enigma-blue p-2 rounded-full mr-3 text-xs flex items-center justify-center w-8 h-8"><i class="fas fa-heart"></i></span>
+                                <div>
+                                    <strong class="text-enigma-yellow block">SEL (Emocions)</strong>
+                                    <span class="text-sm text-gray-300">Cada llibre treballa un eix emocional com l'autoestima o la pertinença.</span>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="mt-auto">
+                            <button class="w-full btn-enigma py-3 bg-white text-enigma-blue font-bold rounded-xl text-sm hover:bg-gray-100 transition-colors">
+                                <i class="fas fa-file-pdf mr-2"></i> Descarregar Guia per a Famílies
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Dreta -->
+                    <div class="bg-white rounded-3xl shadow-xl p-8 border-2 border-gray-100">
+                        <h3 class="text-2xl font-bold text-enigma-blue mb-6">Què treballa cada llibre?</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm text-left">
+                                <thead class="text-gray-400 border-b-2 border-gray-100">
+                                    <tr>
+                                        <th class="py-3 pr-4">Llibre</th>
+                                        <th class="py-3 pr-4">Concepte</th>
+                                        <th class="py-3">Valor</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-600">
+                                    <tr class="border-b border-gray-50 hover:bg-gray-50 transition-colors">
+                                        <td class="py-4 pr-4 font-bold text-enigma-blue">1. Ancestres</td>
+                                        <td class="py-4 pr-4">Progressions</td>
+                                        <td class="py-4"><span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-bold">Pertinença</span></td>
+                                    </tr>
+                                    <tr class="border-b border-gray-50 hover:bg-gray-50 transition-colors">
+                                        <td class="py-4 pr-4 font-bold text-enigma-blue">2. Divina</td>
+                                        <td class="py-4 pr-4">Geometria</td>
+                                        <td class="py-4"><span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs font-bold">Autoestima</span></td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="py-4 pr-4 font-bold text-enigma-blue">3. Codi</td>
+                                        <td class="py-4 pr-4">Criptografia</td>
+                                        <td class="py-4"><span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-bold">Confiança</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- SECCIÓ 6: EL CLUB -->
+        <!-- ============================================= -->
+        <section id="club" class="content-section py-24 bg-enigma-light">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl text-center text-enigma-blue mb-12">El Club dels Enigmàtics</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <!-- Carnet -->
+                    <div class="bg-white rounded-3xl shadow-xl p-8 border-4 border-enigma-blue flex flex-col items-center">
+                        <h3 class="text-2xl text-enigma-yellow mb-4">El Teu Carnet Oficial</h3>
+                        <p class="text-gray-600 mb-8 text-center">Uneix-te a la comunitat, resol enigmes exclusius i aconsegueix recompenses.</p>
+                        
+                        <!-- Visualització Carnet -->
+                        <div class="relative w-full max-w-sm bg-enigma-blue rounded-xl p-6 text-white shadow-2xl transform rotate-1 hover:rotate-0 transition-transform duration-300 mb-8 border-2 border-enigma-yellow group cursor-pointer">
+                            <div class="flex justify-between items-start mb-8">
+                                <img src="imatges/logo els enigmatics.png" class="h-10 opacity-90 grayscale group-hover:grayscale-0 transition-all" onerror="this.style.display='none'">
+                                <span class="bg-enigma-yellow text-enigma-blue text-[10px] font-bold px-3 py-1 rounded shadow-sm">AGENT OFICIAL</span>
+                            </div>
+                            <div class="space-y-3 mb-6">
+                                <div class="h-3 bg-white/10 rounded w-3/4"></div>
+                                <div class="h-3 bg-white/10 rounded w-1/2"></div>
+                            </div>
+                            <div class="flex justify-between items-end border-t border-white/10 pt-4">
+                                <div class="text-[10px] text-enigma-cyan font-mono">ID: #000000</div>
+                                <i class="fas fa-fingerprint text-3xl text-white/20 group-hover:text-white/40 transition-colors"></i>
+                            </div>
+                        </div>
+
+                        <button class="btn-enigma bg-enigma-yellow text-enigma-blue font-bold py-3 px-8 rounded-full w-full max-w-xs transition-colors hover:bg-white border-2 border-enigma-yellow">
+                            <i class="fas fa-download mr-2"></i> Descarregar i Imprimir
+                        </button>
+                    </div>
+
+                    <!-- Agenda -->
+                    <div class="space-y-6">
+                        <h3 class="text-2xl text-enigma-blue mb-6 text-center md:text-left">Properes Trobades</h3>
+                        
+                        <!-- Event 1 -->
+                        <div class="bg-white rounded-2xl p-6 shadow-md border-l-8 border-enigma-yellow flex gap-6 hover:shadow-lg transition-all transform hover:-translate-y-1">
+                            <div class="flex-shrink-0 text-center px-2 border-r border-gray-100 flex flex-col justify-center min-w-[80px]">
+                                <span class="block text-3xl font-black text-enigma-blue font-heading leading-none">15</span>
+                                <span class="block text-sm font-bold text-gray-400 uppercase tracking-widest">ABR</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-enigma-blue mb-1">Presentació "A mi no m'ho van explicar així"</h4>
+                                <p class="text-sm text-gray-600 mb-2"><i class="fas fa-map-marker-alt mr-2 text-enigma-yellow"></i> Biblioteca Comarcal, Gandia</p>
+                                <span class="inline-block text-xs bg-enigma-light text-enigma-blue px-2 py-1 rounded font-bold border border-gray-200">Xerrada Famílies</span>
+                            </div>
+                        </div>
+
+                        <!-- Event 2 -->
+                        <div class="bg-white rounded-2xl p-6 shadow-md border-l-8 border-enigma-cyan flex gap-6 hover:shadow-lg transition-all transform hover:-translate-y-1">
+                            <div class="flex-shrink-0 text-center px-2 border-r border-gray-100 flex flex-col justify-center min-w-[80px]">
+                                <span class="block text-3xl font-black text-enigma-blue font-heading leading-none">22</span>
+                                <span class="block text-sm font-bold text-gray-400 uppercase tracking-widest">MAI</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-enigma-blue mb-1">Taller de Criptografia Junior</h4>
+                                <p class="text-sm text-gray-600 mb-2"><i class="fas fa-map-marker-alt mr-2 text-enigma-cyan"></i> Fira del Llibre, València</p>
+                                <span class="inline-block text-xs bg-enigma-light text-enigma-blue px-2 py-1 rounded font-bold border border-gray-200">Taller Infantil</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Newsletter -->
+                        <form class="bg-enigma-blue rounded-2xl p-6 text-white text-center mt-8 shadow-lg" onsubmit="event.preventDefault(); alert('Gràcies per apuntar-te!');">
+                            <p class="mb-4 font-bold text-lg">Vols rebre els avisos al correu?</p>
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <input type="email" placeholder="El teu email..." class="flex-grow px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-4 focus:ring-enigma-yellow/50" required>
+                                <button type="submit" class="bg-enigma-yellow text-enigma-blue font-bold px-6 py-3 rounded-lg hover:bg-white transition-colors uppercase tracking-wide">OK</button>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-3 opacity-80">Promesa d'Enigmàtic: No farem spam, només coses interessants.</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- SECCIÓ 7: AUTOR -->
+        <!-- ============================================= -->
+        <section id="autor" class="content-section py-24 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
+                <div class="flex-shrink-0 relative">
+                    <div class="absolute inset-0 bg-enigma-yellow rounded-full blur opacity-20 transform translate-x-2 translate-y-2"></div>
+                    <img src="imatges/lluis.JPG" alt="Lluís Miret" class="w-64 h-64 rounded-full shadow-2xl border-4 border-enigma-yellow object-cover relative z-10" loading="lazy">
+                </div>
+                <div class="text-center md:text-left">
+                    <h2 class="text-4xl text-enigma-blue mb-2">Lluís Miret Catalán</h2>
+                    <p class="text-enigma-yellow font-bold uppercase tracking-wider mb-6 text-sm">L'Autor i Enginyer</p>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                        Enginyer, pare i apassionat de l'educació. Vaig crear "Els Enigmàtics" perquè crec que les grans idees de la ciència no són avorrides; són la base de les millors aventures.
+                    </p>
+                    <div class="flex justify-center md:justify-start gap-4">
+                        <a href="#" class="text-gray-400 hover:text-enigma-blue transition-colors text-2xl"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-enigma-blue transition-colors text-2xl"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-enigma-blue text-white py-12 border-t-8 border-enigma-yellow text-center">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-center mb-8">
+                <img src="imatges/logo els enigmatics.png" alt="Logo Footer" class="h-24 opacity-80 hover:opacity-100 transition-opacity" onerror="this.style.display='none'">
+            </div>
+            
+            <div class="flex justify-center space-x-8 mb-8 text-3xl">
+                <a href="#" class="text-white/60 hover:text-enigma-yellow transition-all transform hover:scale-110"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-white/60 hover:text-enigma-yellow transition-all transform hover:scale-110"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="text-white/60 hover:text-enigma-yellow transition-all transform hover:scale-110"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p class="text-gray-400 text-sm font-light tracking-wide">&copy; 2025 Lluís Miret Catalán. Tots els drets reservats.</p>
+        </div>
+    </footer>
+
+    <!-- MODAL -->
+    <div id="book-modal" class="fixed inset-0 bg-enigma-blue/90 flex justify-center items-center p-4 z-[100] hidden backdrop-blur-sm transition-opacity duration-300 opacity-0" aria-hidden="true">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative border-4 border-enigma-yellow transform scale-95 transition-transform duration-300" id="modal-content">
+            <!-- JS Inject -->
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentSections = document.querySelectorAll('.content-section');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const bookModal = document.getElementById('book-modal');
+            const modalContent = document.getElementById('modal-content');
+            const navBrand = document.getElementById('nav-brand');
+
+            // --- NAVIGATION LOGIC ---
+            function showPage(pageId) {
+                // Hide all sections
+                contentSections.forEach(section => {
+                    section.style.display = 'none';
+                    section.classList.remove('animate-[fadeIn_0.4s_ease-out]'); 
+                });
+                
+                // Show target section
+                const targetSection = document.getElementById(pageId);
+                if (targetSection) {
+                    targetSection.style.display = 'block';
+                    void targetSection.offsetWidth; 
+                    targetSection.classList.add('animate-[fadeIn_0.4s_ease-out]');
+                }
+
+                updateNavLinks(pageId);
+
+                if (mobileMenu) mobileMenu.classList.add('hidden');
+                
+                window.scrollTo(0, 0);
+            }
+
+            function updateNavLinks(activePageId) {
+                navLinks.forEach(link => {
+                    const isMobile = link.classList.contains('mobile-nav-link');
+                    
+                    if (link.dataset.page === activePageId) {
+                        if (isMobile) {
+                            link.classList.add('bg-white', 'text-enigma-blue');
+                            link.classList.remove('text-white', 'bg-white/10');
+                        } else {
+                            link.classList.add('nav-link-active');
+                        }
+                    } else {
+                        if (isMobile) {
+                            link.classList.remove('bg-white', 'text-enigma-blue');
+                            link.classList.add('text-white');
+                        } else {
+                            link.classList.remove('nav-link-active');
+                        }
+                    }
+                });
+            }
+
+            // --- EVENT LISTENERS ---
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pageId = link.dataset.page;
+                    showPage(pageId);
+                });
+            });
+
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', () => {
+                    const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                    mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                    mobileMenu.classList.toggle('hidden');
+                    
+                    const icons = mobileMenuButton.querySelectorAll('svg');
+                    icons.forEach(icon => icon.classList.toggle('hidden'));
+                });
+            }
+
+            // --- SCROLL EFFECT (LOGO) ---
+            function handleScroll() {
+                if (window.scrollY > 300) {
+                    navBrand.classList.remove('opacity-0', 'pointer-events-none');
+                    navBrand.classList.add('opacity-100', 'pointer-events-auto');
+                } else {
+                    navBrand.classList.remove('opacity-100', 'pointer-events-auto');
+                    navBrand.classList.add('opacity-0', 'pointer-events-none');
+                }
+            }
+            window.addEventListener('scroll', handleScroll);
+            handleScroll();
+
+            // --- CTA Logic ---
+            const ctaKids = document.getElementById('cta-kids');
+            if(ctaKids) ctaKids.addEventListener('click', () => showPage('laboratori'));
+            
+            const ctaAdults = document.getElementById('cta-adults');
+            if(ctaAdults) ctaAdults.addEventListener('click', () => showPage('families'));
+
+            // --- BOOK DATA ---
+            const bookData = {
+                '1': {
+                    title: "L'arbre dels ancestres",
+                    cover: "imatges/PORTADA ANCESTRES AMAZON.jpg",
+                    synopsis: "Fa mil anys havien d'existir més d'un bilió de persones perquè tu siguis aquí. Però al món només n'hi havia 275 milions. On és l'error? Acompanya l'equip a resoldre aquesta paradoxa matemàtica i descobreix com les branques del passat amaguen el secret de qui som avui.",
+                    previewPdf: "fitxers/capitol1_ancestres.pdf",
+                    saber: "Progressions i Exponencials",
+                    eix: "Pertinença i Identitat",
+                    link: "https://amzn.eu/d/your-link-2"
+                },
+                '2': {
+                    title: "La divina proporció",
+                    cover: "imatges/PORTADA Divina AMAZON.jpg",
+                    synopsis: "Un vell rellotger, un missatge amagat i una pregunta impossible: es pot mesurar la bellesa? Seguint les pistes de la misteriosa Lucínia Mas, els Enigmàtics descobriran que les matemàtiques no són només números... són el codi secret de la natura.",
+                    previewPdf: "fitxers/capitol1_divina.pdf",
+                    saber: "Proporció Àuria (Phi)",
+                    eix: "Autoestima i Bellesa",
+                    link: "https://amzn.eu/d/your-link-1"
+                },
+                '3': {
+                    title: "El codi secret (Properament)",
+                    cover: "https://placehold.co/300x450/E9D8FD/805AD5?text=El+codi+secret",
+                    synopsis: "Un missatge xifrat apareix a l'aula 314. Tothom té secrets, però alguns són perillosos. T'atreveixes a trencar el codi abans que sigui massa tard?",
+                    previewPdf: null,
+                    saber: "Criptografia i Lògica",
+                    eix: "Confiança i Secrets",
+                    link: "#"
+                }
+            };
+
+            // --- MODAL LOGIC ---
+            window.openModal = function(bookId) {
+                const book = bookData[bookId];
+                if (!book) return;
+
+                modalContent.innerHTML = `
+                    <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-enigma-blue z-20 text-4xl transition-colors">&times;</button>
+                    <div class="md:flex p-8 gap-10">
+                        <div class="md:w-1/3 text-center flex-shrink-0">
+                            <img src="${book.cover}" class="rounded-lg shadow-2xl w-full max-w-[220px] mx-auto border border-gray-200 transform hover:scale-105 transition-transform duration-300" onerror="this.src='https://placehold.co/300x450'">
+                            <a href="${book.link}" target="_blank" class="btn-enigma mt-6 block w-full bg-enigma-yellow text-enigma-blue font-black py-3 rounded-full hover:bg-white hover:text-enigma-blue transition-colors text-lg uppercase tracking-wide">
+                                ${bookId === '3' ? 'Avisa\'m quan surti' : 'Comprar a Amazon'}
+                            </a>
+                        </div>
+                        <div class="md:w-2/3 mt-8 md:mt-0 flex flex-col">
+                            <h2 class="text-4xl text-enigma-blue mb-4 font-heading leading-tight">${book.title}</h2>
+                            <p class="text-gray-600 mb-6 text-xl leading-relaxed font-light">${book.synopsis}</p>
+                            
+                            <!-- BOTO DE DESCÀRREGA PDF -->
+                            ${book.previewPdf ? `
+                            <a href="${book.previewPdf}" download class="self-start text-enigma-blue font-bold border-b-2 border-enigma-yellow hover:text-enigma-yellow transition-colors mb-6 flex items-center">
+                                <i class="fas fa-file-pdf mr-2"></i> Descarregar Primer Capítol (PDF)
+                            </a>` : ''}
+                            
+                            <div class="mt-auto">
+                                <h4 class="text-enigma-blue font-bold mb-4 uppercase text-xs tracking-widest opacity-70">Què aprendràs?</h4>
+                                <div class="flex flex-wrap gap-3">
+                                    <span class="bg-white text-enigma-blue px-4 py-2 rounded-full text-sm font-bold border border-enigma-blue/10 shadow-sm flex items-center">
+                                        <i class="fas fa-brain mr-2 text-enigma-cyan"></i> STEAM: ${book.saber}
+                                    </span>
+                                    <span class="bg-white text-enigma-blue px-4 py-2 rounded-full text-sm font-bold border border-enigma-blue/10 shadow-sm flex items-center">
+                                        <i class="fas fa-heart mr-2 text-enigma-yellow"></i> SEL: ${book.eix}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                bookModal.classList.remove('hidden');
+                setTimeout(() => {
+                    bookModal.classList.remove('opacity-0');
+                    modalContent.classList.remove('scale-95');
+                    modalContent.classList.add('scale-100');
+                }, 10);
+            }
+
+            window.closeModal = function() {
+                bookModal.classList.add('opacity-0');
+                modalContent.classList.remove('scale-100');
+                modalContent.classList.add('scale-95');
+                
+                setTimeout(() => {
+                    bookModal.classList.add('hidden');
+                }, 300);
+            }
+
+            document.querySelectorAll('.book-card').forEach(card => {
+                card.addEventListener('click', () => openModal(card.dataset.bookId));
+            });
+
+            bookModal.addEventListener('click', (e) => {
+                if (e.target === bookModal) closeModal();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !bookModal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+
+            const hash = window.location.hash.substring(1);
+            if(hash) {
+                showPage(hash);
+            } else {
+                showPage('inici'); 
+            }
+        });
+    </script>
+</body>
+</html>
