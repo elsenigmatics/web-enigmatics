@@ -16,41 +16,6 @@
     <meta property="og:image" content="imatges/logo.png">
     <meta property="og:type" content="website">
 
-    <!-- Twitter Cards -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Els Enigmàtics - Aventures per Sentir, Imaginar i Raonar">
-    <meta name="twitter:description" content="Acompanya l'Elies, la Joana, la Sofia i en Moha a resoldre enigmes matemàtics i misteris increïbles.">
-    <meta name="twitter:image" content="imatges/logo.png">
-
-    <!-- SEO Tècnic: Canonical i Robots -->
-    <meta name="robots" content="index, follow">
-    <!-- Assegura't de posar el domini real aquí -->
-    <link rel="canonical" href="https://www.elsenigmatics.com/" /> 
-
-    <!-- Preload per optimitzar el LCP (Temps de càrrega de la imatge principal) -->
-    <link rel="preload" as="image" href="imatges/logo.png">
-
-    <!-- Dades Estructurades (Schema.org) per a Google -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebSite",
-          "name": "Els Enigmàtics",
-          "url": "https://www.elsenigmatics.com/",
-          "description": "Col·lecció de llibres infantils de Lluís Miret que uneix misteri, matemàtiques (STEAM) i intel·ligència emocional."
-        },
-        {
-          "@type": "Person",
-          "name": "Lluís Miret Catalán",
-          "url": "https://www.lluismiret.com",
-          "jobTitle": "Escriptor, Enginyer i Pare"
-        }
-      ]
-    }
-    </script>
-
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -84,9 +49,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* scroll-padding-top evita que la capçalera fixa tapi els títols de secció */
-        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
-        body { font-family: 'Nunito', sans-serif; background-color: #FFFEFA; color: #1F2937; }
+        body { font-family: 'Nunito', sans-serif; background-color: #FFFEFA; color: #1F2937; scroll-behavior: smooth; }
         h1, h2, h3, .brand-font { font-family: 'Changa One', sans-serif; text-transform: uppercase; }
         
         .btn-enigma { box-shadow: 0 5px 0 #b39500; transition: all 0.15s ease-in-out; }
@@ -125,7 +88,7 @@
                     <a href="#equip" class="nav-link inline-flex items-center px-1 pt-1 text-lg font-bold text-white hover:text-enigma-yellow transition-colors" data-page="equip">Equip</a>
                     <a href="#laboratori" class="nav-link inline-flex items-center px-1 pt-1 text-lg font-bold text-white hover:text-enigma-yellow transition-colors" data-page="laboratori">Laboratori</a>
                     <a href="#families" class="nav-link inline-flex items-center px-1 pt-1 text-lg font-bold text-white hover:text-enigma-yellow transition-colors" data-page="families">Famílies</a>
-                    <a href="es.html" class="inline-flex items-center px-1 pt-1 text-lg font-bold text-enigma-yellow hover:text-white transition-colors">Español</a>
+                    <a href="#club" class="nav-link inline-flex items-center px-1 pt-1 text-lg font-bold text-white hover:text-enigma-yellow transition-colors" data-page="club">Club</a>
                 </div>
 
                 <div class="-mr-2 flex items-center sm:hidden">
@@ -143,7 +106,7 @@
                 <a href="#equip" class="nav-link block px-3 py-3 rounded-md text-base font-bold text-gray-300" data-page="equip">Equip</a>
                 <a href="#laboratori" class="nav-link block px-3 py-3 rounded-md text-base font-bold text-gray-300" data-page="laboratori">Laboratori</a>
                 <a href="#families" class="nav-link block px-3 py-3 rounded-md text-base font-bold text-gray-300" data-page="families">Famílies</a>
-                <a href="es.html" class="block px-3 py-3 rounded-md text-base font-bold text-enigma-yellow">Español</a>
+                <a href="#club" class="nav-link block px-3 py-3 rounded-md text-base font-bold text-gray-300" data-page="club">Club</a>
             </div>
         </div>
     </header>
@@ -158,7 +121,7 @@
 
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <div class="mb-6 flex justify-center items-center flex-col">
-                        <h1 class="text-4xl md:text-6xl text-enigma-blue brand-font mb-6 leading-tight">Els Enigmàtics: <span class="block text-3xl md:text-5xl mt-2 text-enigma-gold-dark">Llibres d'Aventures i Misteri</span></h1>
+                        <h1 class="text-4xl md:text-6xl text-enigma-blue brand-font mb-6 leading-tight">Llibres d'Aventures i Misteri</h1>
                         <img src="imatges/logo.png" alt="Logo de Els Enigmàtics" class="h-32 w-32 md:h-48 md:w-48 object-cover drop-shadow-2xl rounded-full border-4 border-enigma-yellow animate-bounce" style="animation-duration: 5s" onerror="this.src='https://placehold.co/200x200/1E1B4B/FBBF24?text=Logo'">
                     </div>
                     
@@ -167,8 +130,7 @@
                     </p>
                     
                     <div class="mt-12 group cursor-pointer overflow-hidden rounded-2xl shadow-2xl border-4 border-enigma-yellow">
-                        <!-- Eliminem el lazy loading d'aquesta imatge perquè és above-the-fold (visible immediatament) -->
-                        <img src="imatges/equip.png" alt="Equip de nens protagonistes de la col·lecció de llibres de misteri" class="w-full mx-auto transform transition group-hover:scale-105" fetchpriority="high">
+                        <img src="imatges/equip.png" alt="Equip de nens protagonistes de la col·lecció de llibres de misteri" class="w-full mx-auto transform transition group-hover:scale-105" loading="lazy">
                     </div>
 
                     <div class="mt-16 max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
@@ -329,18 +291,42 @@
                         <p class="text-lg text-gray-300 leading-relaxed mb-10">
                             Et preocupa que el teu fill es bloquegi amb els números? En aquest llibre t'explico la ciència de com aprèn el cervell i et dono les claus per acompanyar-lo amb calma i il·lusió.
                         </p>
-                        
-                        <!-- BOTÓ MODIFICAT A ENLLAÇ AQUÍ -->
-                        <a href="https://www.lluismiret.com" target="_blank" rel="noopener noreferrer" class="inline-block text-center btn-enigma bg-white text-enigma-blue font-black py-5 px-12 rounded-full text-xl hover:bg-enigma-yellow transition uppercase tracking-widest">
+                        <button class="btn-enigma bg-white text-enigma-blue font-black py-5 px-12 rounded-full text-xl hover:bg-enigma-yellow transition uppercase tracking-widest">
                             Vull pau a l'hora dels deures
-                        </a>
-                        
+                        </button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓ 6: AUTOR -->
+        <!-- SECCIÓ 6: CLUB (LEAD MAGNET) -->
+        <section id="club" class="content-section py-24 bg-enigma-light">
+            <div class="max-w-4xl mx-auto px-4 text-center">
+                <h2 class="text-4xl text-enigma-blue mb-8 font-heading">El Club d'Enigmàtics Oficials</h2>
+                <div class="bg-white p-12 md:p-16 rounded-[3rem] shadow-2xl border-4 border-enigma-blue relative overflow-hidden">
+                    <!-- Badge Regal -->
+                    <div class="absolute -top-6 -right-6 bg-enigma-yellow h-24 w-24 rounded-full flex items-center justify-center text-enigma-blue text-3xl shadow-xl animate-pulse">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3 class="text-3xl font-black mb-6 uppercase text-enigma-blue">Regal de Benvinguda!</h3>
+                    <p class="text-xl text-gray-600 mb-12 font-body leading-relaxed">
+                        Enigmàtic, la missió comença ara. Registra't i descarrega **gratis** el primer capítol de la col·lecció i el teu **Carnet d'Enigmàtic Oficial** personalitzable.
+                    </p>
+                    
+                    <form id="club-form" class="max-w-md mx-auto space-y-5">
+                        <input type="email" required placeholder="Correu de l'enigmàtic (o pare/mare)..." class="w-full p-6 border-2 border-gray-100 rounded-3xl focus:border-enigma-yellow outline-none text-lg transition shadow-inner">
+                        <button type="submit" class="btn-enigma w-full bg-enigma-blue text-white font-black py-6 rounded-3xl text-xl uppercase tracking-[0.15em] hover:bg-black transition">
+                            Vull el meu regal ara!
+                        </button>
+                    </form>
+                    <div id="form-feedback" class="mt-10 p-6 bg-green-50 text-green-700 rounded-3xl font-bold hidden border-2 border-green-200 animate-bounce">
+                        <i class="fas fa-check-circle mr-3"></i> Enigmàtic registrat amb èxit! Revisa la teva bústia de correu.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓ 7: AUTOR -->
         <section id="autor" class="content-section py-24 bg-white">
             <div class="max-w-5xl mx-auto px-4 flex flex-col md:flex-row items-center gap-20">
                 <div class="relative flex-shrink-0">
@@ -368,43 +354,20 @@
             <img src="imatges/logo.png" alt="Logo final" class="h-28 w-28 object-cover rounded-full mx-auto mb-10 border-4 border-enigma-yellow hover:rotate-12 transition opacity-90 shadow-2xl" loading="lazy" onerror="this.src='https://placehold.co/100x100/1E1B4B/FBBF24?text=Logo'">
             
             <div class="flex justify-center space-x-12 mb-12 text-4xl">
-                <a href="#" aria-label="Visita el nostre Instagram" title="Perfil d'Instagram de Els Enigmàtics" class="hover:text-enigma-yellow transition-transform hover:-translate-y-2"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="Visita el nostre Facebook" title="Pàgina de Facebook de Els Enigmàtics" class="hover:text-enigma-yellow transition-transform hover:-translate-y-2"><i class="fab fa-facebook"></i></a>
-                <a href="mailto:info@elsenigmatics.com" aria-label="Envia'ns un correu" title="Contactar per correu electrònic" class="hover:text-enigma-yellow transition-transform hover:-translate-y-2"><i class="fas fa-envelope"></i></a>
-            </div>
-            
-            <div class="flex flex-wrap justify-center gap-4 sm:gap-8 mb-8 text-sm text-gray-400 font-bold">
-                <a href="https://www.lluismiret.com/politica-de-privacitat/" target="_blank" class="hover:text-enigma-yellow transition">Política de Privacitat</a>
-                <a href="https://www.lluismiret.com/politica-de-cookies/" target="_blank" class="hover:text-enigma-yellow transition">Política de Galetes</a>
-                <a href="https://www.lluismiret.com/avis-legal/" target="_blank" class="hover:text-enigma-yellow transition">Avís Legal</a>
+                <a href="#" aria-label="Visita el nostre Instagram" class="hover:text-enigma-yellow transition-transform hover:-translate-y-2"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Visita el nostre Facebook" class="hover:text-enigma-yellow transition-transform hover:-translate-y-2"><i class="fab fa-facebook"></i></a>
+                <a href="mailto:info@elsenigmatics.com" aria-label="Envia'ns un correu" class="hover:text-enigma-yellow transition-transform hover:-translate-y-2"><i class="fas fa-envelope"></i></a>
             </div>
             
             <p class="text-gray-500 text-sm tracking-widest uppercase font-bold">&copy; 2025 Lluís Miret Catalán. Tots els drets reservats.</p>
         </div>
     </footer>
 
-    <!-- BANNER DE GALETES I PRIVACITAT -->
-    <div id="cookie-banner" class="fixed bottom-0 inset-x-0 pb-2 sm:pb-5 z-[110] hidden">
-        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-            <div class="p-5 rounded-2xl bg-enigma-blue shadow-2xl border-2 border-enigma-yellow flex flex-col lg:flex-row items-center justify-between gap-6">
-                <div class="text-white text-sm font-body text-center lg:text-left flex-1 leading-relaxed">
-                    Utilitzem galetes pròpies i de tercers per millorar la vostra experiència i analitzar el trànsit web. En fer clic a "Acceptar", doneu el vostre consentiment. Podeu obtenir més informació a la nostra 
-                    <a href="https://www.lluismiret.com/politica-de-cookies/" target="_blank" class="text-enigma-yellow underline font-bold hover:text-white transition whitespace-nowrap">Política de Galetes</a> i 
-                    <a href="https://www.lluismiret.com/politica-de-privacitat/" target="_blank" class="text-enigma-yellow underline font-bold hover:text-white transition whitespace-nowrap">Política de Privacitat</a>.
-                </div>
-                <div class="flex gap-3 flex-shrink-0 w-full lg:w-auto justify-center">
-                    <button id="btn-reject-cookies" class="px-5 py-3 rounded-xl text-sm font-bold text-white border border-white/30 hover:bg-white/10 transition w-full sm:w-auto">Rebutjar</button>
-                    <button id="btn-accept-cookies" class="px-8 py-3 rounded-xl text-sm font-bold bg-enigma-yellow text-enigma-blue hover:bg-yellow-300 transition w-full sm:w-auto shadow-lg">Acceptar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- MODAL DE LLIBRES (INTERACTIU) -->
-    <div id="book-modal" class="fixed inset-0 bg-enigma-blue/95 flex justify-center items-center p-4 z-[100] hidden backdrop-blur-xl" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div id="book-modal" class="fixed inset-0 bg-enigma-blue/95 flex justify-center items-center p-4 z-[100] hidden backdrop-blur-xl">
         <div class="bg-white rounded-[3rem] shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col relative border-b-8 border-gray-100" id="modal-container">
             <!-- Botó Tancar -->
-            <button onclick="document.getElementById('book-modal').classList.add('hidden'); document.body.style.overflow = 'auto';" class="absolute top-8 right-8 text-gray-400 hover:text-enigma-blue z-50 text-5xl focus:outline-none" aria-label="Tancar modal">&times;</button>
+            <button onclick="document.getElementById('book-modal').classList.add('hidden')" class="absolute top-8 right-8 text-gray-400 hover:text-enigma-blue z-50 text-5xl focus:outline-none" aria-label="Tancar modal">&times;</button>
             
             <div class="overflow-y-auto p-10 md:p-16" id="modal-content">
                 <!-- Contingut generat per JS -->
@@ -434,11 +397,7 @@
                     else link.classList.remove('nav-link-active');
                 });
 
-                // Tanca el menú mòbil si està obert en fer clic a un enllaç
-                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                }
-                
+                if (mobileMenu) mobileMenu.classList.add('hidden');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
 
@@ -465,6 +424,13 @@
             // Botons CTAs de l'Inici
             document.getElementById('cta-kids').addEventListener('click', () => showPage('laboratori'));
             document.getElementById('cta-adults').addEventListener('click', () => showPage('families'));
+
+            // Feedback del Formulari del Club
+            document.getElementById('club-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                document.getElementById('form-feedback').classList.remove('hidden');
+                e.target.reset();
+            });
 
             // --- DADES DELS LLIBRES (ACTUALITZADES AMB PDFS) ---
             const bookData = {
@@ -513,7 +479,7 @@
                         </div>
                         <div class="md:w-2/3 flex flex-col">
                             <span class="text-sm font-black text-gray-400 uppercase tracking-widest mb-4">Col·lecció Els Enigmàtics nº${id}</span>
-                            <h2 id="modal-title" class="text-5xl text-enigma-blue mb-8 font-heading leading-tight">${b.title}</h2>
+                            <h2 class="text-5xl text-enigma-blue mb-8 font-heading leading-tight">${b.title}</h2>
                             <p class="text-xl text-gray-600 mb-10 leading-relaxed font-body">${b.synopsis}</p>
                             
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
@@ -528,7 +494,7 @@
                             </div>
 
                             <div class="modal-buy-sticky mt-auto">
-                                <a href="${b.link}" target="_blank" rel="noopener noreferrer" title="Comprar llibre ${b.title} a Amazon" class="block w-full text-center bg-enigma-yellow text-enigma-blue font-black py-6 rounded-3xl shadow-2xl hover:scale-105 transition-transform uppercase tracking-widest text-xl">
+                                <a href="${b.link}" target="_blank" class="block w-full text-center bg-enigma-yellow text-enigma-blue font-black py-6 rounded-3xl shadow-2xl hover:scale-105 transition-transform uppercase tracking-widest text-xl">
                                     COMPRAR A AMAZON
                                 </a>
                             </div>
@@ -552,43 +518,9 @@
                 }
             });
 
-            // Permet tancar el modal prement la tecla "Escape" (Accessibilitat UX)
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && !document.getElementById('book-modal').classList.contains('hidden')) {
-                    document.getElementById('book-modal').classList.add('hidden');
-                    document.body.style.overflow = 'auto';
-                }
-            });
-
             // Comprovació inicial de la URL (si algú entra amb #colleccio per exemple)
             const hash = window.location.hash.substring(1);
             if(hash) showPage(hash);
-
-            // --- LÒGICA DEL BANNER DE GALETES ---
-            const cookieBanner = document.getElementById('cookie-banner');
-            const btnAcceptCookies = document.getElementById('btn-accept-cookies');
-            const btnRejectCookies = document.getElementById('btn-reject-cookies');
-
-            // Comprovem si l'usuari ja ha acceptat/rebutjat
-            if (!localStorage.getItem('cookieConsent')) {
-                // Mostrem el banner amb un petit retard per captar l'atenció
-                setTimeout(() => {
-                    cookieBanner.classList.remove('hidden');
-                    // Petita animació d'entrada
-                    cookieBanner.classList.add('animate-fade-in-up'); 
-                }, 1000);
-            }
-
-            btnAcceptCookies.addEventListener('click', () => {
-                localStorage.setItem('cookieConsent', 'accepted');
-                cookieBanner.classList.add('hidden');
-                // Aquí podries inicialitzar Google Analytics si en tens
-            });
-
-            btnRejectCookies.addEventListener('click', () => {
-                localStorage.setItem('cookieConsent', 'rejected');
-                cookieBanner.classList.add('hidden');
-            });
         });
     </script>
 </body>
