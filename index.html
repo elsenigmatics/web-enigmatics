@@ -330,7 +330,6 @@
                             Et preocupa que el teu fill es bloquegi amb els números? En aquest llibre t'explico la ciència de com aprèn el cervell i et dono les claus per acompanyar-lo amb calma i il·lusió.
                         </p>
                         
-                        <!-- BOTÓ MODIFICAT A ENLLAÇ AQUÍ -->
                         <a href="https://www.lluismiret.com" target="_blank" rel="noopener noreferrer" class="inline-block text-center btn-enigma bg-white text-enigma-blue font-black py-5 px-12 rounded-full text-xl hover:bg-enigma-yellow transition uppercase tracking-widest">
                             Vull pau a l'hora dels deures
                         </a>
@@ -466,7 +465,9 @@
             document.getElementById('cta-kids').addEventListener('click', () => showPage('laboratori'));
             document.getElementById('cta-adults').addEventListener('click', () => showPage('families'));
 
-            // --- DADES DELS LLIBRES (ACTUALITZADES AMB PDFS) ---
+            // --- DADES DELS LLIBRES (ACTUALITZADES AMB NOUS ENLLAÇOS) ---
+            const amazonLink = "https://www.amazon.es/stores/Llu%C3%ADs-Miret-Catal%C3%A1n/author/B0GX5SSF7K?ref=ap_rdr&shoppingPortalEnabled=true";
+
             const bookData = {
                 '1': {
                     title: "L'arbre dels ancestres",
@@ -474,7 +475,7 @@
                     synopsis: "Quants avantpassats tens? Dos pares. Quatre avis. Vuit besavis... I si et diguessin que aquest càlcul és impossible? Una història apassionant sobre la pertinença i la cooperació, on l'Elies, la Joana, la Sofia i en Moha han de treballar en equip per resoldre un repte del seu professor Abraham.",
                     saber: "Progressions matemàtiques i Exponencials",
                     eix: "Identitat i Pertinença",
-                    link: "https://amzn.to/example-link-1",
+                    link: amazonLink,
                     color: "book-1"
                 },
                 '2': {
@@ -483,7 +484,7 @@
                     synopsis: "Existeix un codi secret amagat a la natura? Una petxina, la Torre Eiffel o el teu propi dit... tot sembla connectat pel mateix número. En aquest llibre, l'equip s'enfronta a una classe plena de nens de sis anys i a un caos de blocs de colors per descobrir el llenguatge secret de la bellesa.",
                     saber: "Geometria i Proporció Àuria (Phi)",
                     eix: "Superar la por al fracàs i Autoestima",
-                    link: "https://amzn.to/example-link-2",
+                    link: amazonLink,
                     color: "book-2"
                 },
                 '3': {
@@ -492,7 +493,7 @@
                     synopsis: "Un avió de paper. Un diari ocult de la Lucínia Mas. Un misteri que comença a l'aula 314 de l'escola Wittgenstein. Els quatre amics hauran de descobrir el poder dels algoritmes i els secrets del 'vell Cèsar' per trobar la paraula clau secreta.",
                     saber: "Criptografia i Pensament Algorítmic",
                     eix: "Treball en equip i Intuïció",
-                    link: "#",
+                    link: amazonLink,
                     color: "book-3"
                 }
             };

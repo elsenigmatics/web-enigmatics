@@ -466,7 +466,9 @@
             document.getElementById('cta-kids').addEventListener('click', () => showPage('laboratori'));
             document.getElementById('cta-adults').addEventListener('click', () => showPage('families'));
 
-            // --- DADES DELS LLIBRES (TRADUÏDES) ---
+            // --- DADES DELS LLIBRES (TRADUÏDES I AMB L'ENLLAÇ D'AMAZON ACTUALITZAT) ---
+            const amazonStoreUrl = "https://www.amazon.es/stores/Llu%C3%ADs-Miret-Catal%C3%A1n/author/B0GX5SSF7K?ref=ap_rdr&shoppingPortalEnabled=true";
+
             const bookData = {
                 '1': {
                     title: "El árbol de los ancestros",
@@ -474,7 +476,7 @@
                     synopsis: "¿Cuántos antepasados tienes? Dos padres. Cuatro abuelos. Ocho bisabuelos... ¿Y si te dijeran que este cálculo es imposible? Una historia apasionante sobre la pertenencia y la cooperación, donde Elías, Juana, Sofia y Moha tienen que trabajar en equipo para resolver un reto de su profesor Abraham.",
                     saber: "Progresiones matemáticas y Exponenciales",
                     eix: "Identidad y Pertenencia",
-                    link: "https://amzn.to/example-link-1",
+                    link: amazonStoreUrl, // Enlace actualizado a la tienda
                     color: "book-1"
                 },
                 '2': {
@@ -483,7 +485,7 @@
                     synopsis: "¿Existe un código secreto escondido en la naturaleza? Una concha, la Torre Eiffel o tu propio dedo... todo parece conectado por el mismo número. En este libro, el equipo se enfrenta a una clase llena de niños de seis años y a un caos de bloques de colores para descubrir el lenguaje secreto de la belleza.",
                     saber: "Geometría y Proporción Áurea (Phi)",
                     eix: "Superar el miedo al fracaso y Autoestima",
-                    link: "https://amzn.to/example-link-2",
+                    link: amazonStoreUrl, // Enlace actualizado a la tienda
                     color: "book-2"
                 },
                 '3': {
@@ -492,7 +494,7 @@
                     synopsis: "Un avión de papel. Un diario oculto de Lucínia Mas. Un misterio que comienza en el aula 314 de la escuela Wittgenstein. Los cuatro amigos tendrán que descubrir el poder de los algoritmos y los secretos del 'viejo César' para encontrar la palabra clave secreta.",
                     saber: "Criptografía y Pensamiento Algorítmico",
                     eix: "Trabajo en equipo e Intuición",
-                    link: "#",
+                    link: amazonStoreUrl, // Enlace actualizado a la tienda
                     color: "book-3"
                 }
             };
